@@ -32,9 +32,9 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
   // read the input pin:
-      int LDR_reading = analogRead(LDR_sensor)/4;
+      int LDR_reading = analogRead(LDR_sensor);
       // place the rest of the code here:
-      if (LDR_reading < 200 ){
+      if (LDR_reading < 40 ){
           digitalWrite(relay_pin, HIGH);
         }
       else {
@@ -42,14 +42,14 @@ void loop() {
         }
       
       // print out the state of the button:
-      Serial.println(LDR_reading);
-      Serial.println("*****************");
+      //Serial.println(LDR_reading);
+      //Serial.println("*****************");
       if (address < EEPROM.length()){
-        EEPROM.write(address, LDR_reading);
+        EEPROM.write(address, LDR_reading/4);
         address += 1; 
         }
              // Get reading every 10 seconds
-  for (int i = 0; i < 300; i++){
+  for (int i = 0; i < 30; i++){
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   }
 
